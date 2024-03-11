@@ -1,37 +1,38 @@
-class Army:
-    def __init__(self, name, faction):
+class Unit:
+    def __init__(self, name, unit_type, weapon_type, power_level):
         self.name = name
-        self.faction = faction
+        self.unit_type = unit_type
+        self.weapon_type = weapon_type
+        self.power_level = power_level
+
+    def describe(self):
+        print(f"Name: {self.name}, Type: {self.unit_type}, Weapon: {self.weapon_type}, Power Level: {self.power_level}")
+
+
+class Army:
+    def __init__(self):
         self.units = []
 
     def add_unit(self, unit):
         self.units.append(unit)
-        print(f"{unit.name} added to the army.")
+        print(f"Added {unit.name} to the army.")
 
-    def remove_unit(self, unit_name):
-        self.units = [unit for unit in self.units if unit.name != unit_name]
-        print(f"{unit_name} removed from the army.")
-
-    def display_army(self):
-        print(f"Army name: {self.name}, Faction: {self.faction}")
+    def describe_army(self):
+        print("Army Composition:")
         for unit in self.units:
-            unit.display_unit()
-
-class Unit:
-    def __init__(self, name, type, weapon_type, power_level):
-        self.name = name
-        self.type = type
-        self.weapon_type = weapon_type
-        self.power_level = power_level
+            unit.describe()
 
 
-    def display_unit(self):
-        print(f"Name: {self.name}, Type: {self.type}, Weapon type: {self.weapon_type}, Power level: {self.power_level}")
+if __name__ == "__main__":
+    tactical_squad = Unit("Intercessors", "Infantry", "Bolter", 5)
+    dreadnought = Unit("Dreadnought", "Vehicle", "Multi-Melta", 15)
+    primarch = Unit("Roboute Guilliman", "Primarch", "Emperor's sword", 50)
+    infiltrators = Unit("Infiltrators", "Specialists", "Sniper rifles", 10)
 
-orks = Army("Bad Moons", "WAAAAAAAAAGH")
-shoota_boiz = Unit("Shootaz", "Boyz","Shoota", 5)
-choppa_boiz = Unit("Choppaz", "Boyz", "Choppa", 5)
-orks.add_unit(shoota_boiz)
-orks.add_unit(choppa_boiz)
+    my_army = Army()
+    my_army.add_unit(tactical_squad)
+    my_army.add_unit(dreadnought)
+    my_army.add_unit(primarch)
+    my_army.add_unit(infiltrators)
 
-orks.display_army()
+    my_army.describe_army()
